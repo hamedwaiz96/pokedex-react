@@ -24,7 +24,7 @@ class PokemonDetail extends React.Component {
         return(
             <div>
                 <h1>{self.props.pokemon.name}</h1>
-                <img src={self.props.pokemon.image_url} alt=""/>
+                <img src={self.props.pokemon.image_url} height="144" width="144" alt=""/>
                 <p>{self.props.pokemon.poke_type}</p>
                 <p>Attack: {self.props.pokemon.attack}</p>
                 <p>Defense: {self.props.pokemon.defense}</p>
