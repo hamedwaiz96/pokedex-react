@@ -18,19 +18,25 @@ class PokemonIndex extends React.Component {
     render(){
         const self = this;
         return(
-            <section className="pokedex">
-                <ul>
-                    {self.props.pokemon.map((poke) => {
-                        return (
-                            <PokemonIndexItem key={poke.id} poke={poke} />
-                        )
-                    })}
-                </ul>
-                <div className="front">
-                    <PokemonFormContainer />
-                    <Route path="/pokemon/:pokemonId" component={PokemonDetailContainer} />
-                </div>
-            </section>
+            <div>
+                {self.props.loading ? (<div id="loading-pokeball-container">
+                        <div id="loading-pokeball"></div>
+                </div>) : (<section className="pokedex">
+                    <ul>
+                        {self.props.pokemon.map((poke) => {
+                            return (
+                                <PokemonIndexItem key={poke.id} poke={poke} />
+                            )
+                        })}
+                    </ul>
+                    <div className="front">
+                        <PokemonFormContainer />
+                        <Route path="/pokemon/:pokemonId" component={PokemonDetailContainer} />
+                    </div>
+                </section>)}
+            </div>
+            
+            
         )
     }
 }

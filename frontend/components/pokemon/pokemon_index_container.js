@@ -8,7 +8,8 @@ const mapDispatchToProps = dispatch => ({
 })
 
 const mapStateToProps = state => ({
-    pokemon: selectAllPokemon(state)
+    pokemon: selectAllPokemon(state),
+    loading: state.ui.loading.indexLoading
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PokemonIndex)
