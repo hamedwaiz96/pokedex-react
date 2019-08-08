@@ -9,7 +9,7 @@ class PokemonIndexItem extends React.Component {
     render(){
         const self = this;
         return(
-                <li><Link to={`/pokemon/${self.props.poke.id}`}><img height="140" width="140" src={self.props.poke.image_url} alt="" /> {self.props.poke.name}</Link></li>
+            <li><Link to={`/pokemon/${self.props.poke.id}`}><span>{self.props.poke.id}</span> <img src={self.props.poke.image_url} alt="" /> <span>{self.props.poke.name}</span></Link></li>
             
         )
     }

@@ -53,7 +53,7 @@ class PokemonForm extends React.Component {
 
     render(){
         return(
-            <div>
+            <div className="Form">
                 <ul>
                     {this.props.errors.map((error) => {
                         return (
@@ -61,12 +61,16 @@ class PokemonForm extends React.Component {
                         )
                     })}
                 </ul>
-                <h1>Create a new Pokemon</h1>
+                <img src="http://aa-pokedex.herokuapp.com/assets/pokemon-logo.svg" alt=""/>
                 <form onSubmit={this.handleSubmit}>
-                    <label htmlFor="">Name <input type="text" onChange={this.update('name')} /></label>
-                    <label htmlFor="">Attack <input type="number" onChange={this.update('attack')} /></label>
-                    <label htmlFor="">Defense <input type="number" onChange={this.update('defense')} /></label>
-                    <label htmlFor="">Image <input type="text" onChange={this.update('image_url')} /></label>
+                    <input placeholder="Name" type="text" onChange={this.update('name')} />
+                    <br/>
+                    <input type="number" onChange={this.update('attack')} placeholder="Attack" />
+                    <br/>
+                    <input type="number" onChange={this.update('defense')} placeholder="Defense" />
+                    <br/>
+                    <input type="text" onChange={this.update('image_url')} placeholder="Image" />
+                    <br/>
                     <select name="poke_type" id="" onChange={this.update('poke_type')} >
                         {this.TYPES.map((type, idx) => {
                             return (
@@ -74,8 +78,11 @@ class PokemonForm extends React.Component {
                             )
                         })}
                     </select>
-                    <label htmlFor="">Move 1 <input type="text" onChange={this.updateMoves('0')}/></label>
-                    <label htmlFor="">Move 2 <input type="text" onChange={this.updateMoves('1')} /></label>
+                    <br/>
+                    <input type="text" onChange={this.updateMoves('0')} placeholder="Move 1" />
+                    <br/>
+                    <input type="text" onChange={this.updateMoves('1')} placeholder="Move 2" />
+                    <br/>    
                     <input type="submit" value="Create Pokemon" />
                 </form>
             </div>

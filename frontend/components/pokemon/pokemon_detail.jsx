@@ -9,6 +9,8 @@ class PokemonDetail extends React.Component {
 
     componentDidMount(){
         const self = this;
+        let form = document.getElementsByClassName('Form')[0]
+        form.className = 'Form hidden';
         this.props.requestSinglePokemon(self.props.match.params.pokemonId)
     }
 
@@ -22,13 +24,13 @@ class PokemonDetail extends React.Component {
     render(){
         const self = this;
         return(
-            <div>
+            <div className="pokemon-detail">
                 <h1>{self.props.pokemon.name}</h1>
                 <img src={self.props.pokemon.image_url} height="144" width="144" alt=""/>
                 <p>{self.props.pokemon.poke_type}</p>
                 <p>Attack: {self.props.pokemon.attack}</p>
                 <p>Defense: {self.props.pokemon.defense}</p>
-                <ul>
+                <ul className="items">
                     {self.props.items.map((item) => {
                         return(
                             <li key={item.id}><Link to={`/pokemon/${self.props.match.params.pokemonId}/items/${item.id}`}>{item.name}</Link></li>

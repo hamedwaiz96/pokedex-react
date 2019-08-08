@@ -292,6 +292,8 @@ function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       var self = this;
+      var form = document.getElementsByClassName('Form')[0];
+      form.className = 'Form hidden';
       this.props.requestSinglePokemon(self.props.match.params.pokemonId);
     }
   }, {
@@ -307,12 +309,16 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       var self = this;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, self.props.pokemon.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "pokemon-detail"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, self.props.pokemon.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: self.props.pokemon.image_url,
         height: "144",
         width: "144",
         alt: ""
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, self.props.pokemon.poke_type), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Attack: ", self.props.pokemon.attack), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Defense: ", self.props.pokemon.defense), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, self.props.items.map(function (item) {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, self.props.pokemon.poke_type), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Attack: ", self.props.pokemon.attack), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Defense: ", self.props.pokemon.defense), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "items"
+      }, self.props.items.map(function (item) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
           key: item.id
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
@@ -464,31 +470,32 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.props.errors.map(function (error) {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "Form"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.props.errors.map(function (error) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, error);
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Create a new Pokemon"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: "http://aa-pokedex.herokuapp.com/assets/pokemon-logo.svg",
+        alt: ""
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.handleSubmit
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: ""
-      }, "Name ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        placeholder: "Name",
         type: "text",
         onChange: this.update('name')
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: ""
-      }, "Attack ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "number",
-        onChange: this.update('attack')
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: ""
-      }, "Defense ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        onChange: this.update('attack'),
+        placeholder: "Attack"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "number",
-        onChange: this.update('defense')
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: ""
-      }, "Image ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        onChange: this.update('defense'),
+        placeholder: "Defense"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
-        onChange: this.update('image_url')
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        onChange: this.update('image_url'),
+        placeholder: "Image"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         name: "poke_type",
         id: "",
         onChange: this.update('poke_type')
@@ -497,17 +504,15 @@ function (_React$Component) {
           key: idx,
           value: type
         }, type);
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: ""
-      }, "Move 1 ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
-        onChange: this.updateMoves('0')
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: ""
-      }, "Move 2 ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        onChange: this.updateMoves('0'),
+        placeholder: "Move 1"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
-        onChange: this.updateMoves('1')
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        onChange: this.updateMoves('1'),
+        placeholder: "Move 2"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "submit",
         value: "Create Pokemon"
       })));
@@ -609,6 +614,8 @@ function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.requestAllPokemon();
+      var form = document.getElementsByClassName('Form')[0];
+      form.className = 'Form';
     }
   }, {
     key: "render",
@@ -616,14 +623,16 @@ function (_React$Component) {
       var self = this;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "pokedex"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pokemon_form_container__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
-        path: "/pokemon/:pokemonId",
-        component: _pokemon_detail_container__WEBPACK_IMPORTED_MODULE_2__["default"]
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, self.props.pokemon.map(function (poke) {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, self.props.pokemon.map(function (poke) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pokemon_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: poke.id,
           poke: poke
         });
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "front"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pokemon_form_container__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
+        path: "/pokemon/:pokemonId",
+        component: _pokemon_detail_container__WEBPACK_IMPORTED_MODULE_2__["default"]
       })));
     }
   }]);
@@ -721,12 +730,10 @@ function (_React$Component) {
       var self = this;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
         to: "/pokemon/".concat(self.props.poke.id)
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        height: "140",
-        width: "140",
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, self.props.poke.id), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: self.props.poke.image_url,
         alt: ""
-      }), " ", self.props.poke.name));
+      }), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, self.props.poke.name)));
     }
   }]);
 

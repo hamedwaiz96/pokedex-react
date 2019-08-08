@@ -11,14 +11,14 @@ class PokemonIndex extends React.Component {
     
     componentDidMount(){
         this.props.requestAllPokemon()
+        let form = document.getElementsByClassName('Form')[0]
+        form.className = 'Form';
     }
 
     render(){
         const self = this;
         return(
             <section className="pokedex">
-                <PokemonFormContainer />
-                <Route path="/pokemon/:pokemonId" component={PokemonDetailContainer} />
                 <ul>
                     {self.props.pokemon.map((poke) => {
                         return (
@@ -26,6 +26,10 @@ class PokemonIndex extends React.Component {
                         )
                     })}
                 </ul>
+                <div className="front">
+                    <PokemonFormContainer />
+                    <Route path="/pokemon/:pokemonId" component={PokemonDetailContainer} />
+                </div>
             </section>
         )
     }
