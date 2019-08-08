@@ -164,6 +164,8 @@
    list-style-type: none;
    width: 30%;
    padding: 0;
+   overflow: auto; 
+   max-height: 100vh;
  }
 
 body > header {

@@ -444,7 +444,7 @@ function (_React$Component) {
     _classCallCheck(this, PokemonForm);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(PokemonForm).call(this, props));
-    _this.TYPES = ['fire', 'electric', 'normal', 'ghost', 'psychic', 'water', 'bug', 'dragon', 'grass', 'fighting', 'ice', 'flying', 'poison', 'ground', 'rock', 'steel'];
+    _this.TYPES = POKEMON_TYPES;
     _this.state = {
       name: "",
       attack: "",

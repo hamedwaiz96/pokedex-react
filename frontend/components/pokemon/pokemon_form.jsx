@@ -4,24 +4,7 @@ import {withRouter} from 'react-router-dom';
 class PokemonForm extends React.Component {
     constructor(props){
         super(props);
-        this.TYPES = [
-            'fire',
-            'electric',
-            'normal',
-            'ghost',
-            'psychic',
-            'water',
-            'bug',
-            'dragon',
-            'grass',
-            'fighting',
-            'ice',
-            'flying',
-            'poison',
-            'ground',
-            'rock',
-            'steel'
-        ];
+        this.TYPES = POKEMON_TYPES;
         this.state = {name: "", attack: "", defense: "", image_url: "", poke_type: this.TYPES[0], moves: ["", ""]};
         this.update = this.update.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
