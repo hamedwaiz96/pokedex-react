@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link, Route} from 'react-router-dom';
 import ItemDetailContainer from '../items/item_detail_container';
+import PokemonMap from './pokemon_map';
 
 class PokemonDetail extends React.Component {
     constructor(props){
@@ -40,6 +41,8 @@ class PokemonDetail extends React.Component {
                             )
                         })}
                     </ul>
+                    <h1>Locations: </h1>
+                    <PokemonMap locations={self.props.locations} createSingleLocation={self.props.createSingleLocation} pokemonId={self.props.match.params.pokemonId} image={this.props.image} />
                     <Route path="/pokemon/:pokemonId/items/:itemId" component={ItemDetailContainer} />
                 </div>)}
             </div>

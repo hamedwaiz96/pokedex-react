@@ -9,3 +9,10 @@ json.items do
         end
     end
 end
+json.locations do
+    @pokemon.locations.each do |location|
+        json.set! location.id do
+            json.extract! location, :id, :lat, :lng, :pokemon_id
+        end
+    end
+end

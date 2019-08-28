@@ -24,4 +24,5 @@ class Pokemon < ApplicationRecord
   validates :poke_type, inclusion: { in: TYPES }
 
   has_many :items
+  has_many :locations
 end

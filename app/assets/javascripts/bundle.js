@@ -86,6 +86,37 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./frontend/actions/location_actions.js":
+/*!**********************************************!*\
+  !*** ./frontend/actions/location_actions.js ***!
+  \**********************************************/
+/*! exports provided: RECEIVE_SINGLE_LOCATION, receiveSingleLocation, createSingleLocation */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_SINGLE_LOCATION", function() { return RECEIVE_SINGLE_LOCATION; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveSingleLocation", function() { return receiveSingleLocation; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createSingleLocation", function() { return createSingleLocation; });
+/* harmony import */ var _util_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/api_util */ "./frontend/util/api_util.js");
+
+var RECEIVE_SINGLE_LOCATION = 'RECEIVE_SINGLE_LOCATION';
+var receiveSingleLocation = function receiveSingleLocation(location) {
+  return {
+    type: RECEIVE_SINGLE_LOCATION,
+    location: location
+  };
+};
+var createSingleLocation = function createSingleLocation(location, pokemonId) {
+  return function (dispatch) {
+    return _util_api_util__WEBPACK_IMPORTED_MODULE_0__["createSingleLocation"](location, pokemonId).then(function (location) {
+      return dispatch(receiveSingleLocation(location));
+    });
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/pokemon_actions.js":
 /*!*********************************************!*\
   !*** ./frontend/actions/pokemon_actions.js ***!
@@ -260,6 +291,132 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 
 /***/ }),
 
+/***/ "./frontend/components/pokemon/location_form.jsx":
+/*!*******************************************************!*\
+  !*** ./frontend/components/pokemon/location_form.jsx ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+var LocationForm =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(LocationForm, _React$Component);
+
+  function LocationForm(props) {
+    var _this;
+
+    _classCallCheck(this, LocationForm);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(LocationForm).call(this, props));
+    _this.state = {
+      lat: _this.props.lat,
+      lng: _this.props.lng,
+      pokemon_id: _this.props.pokemonId
+    };
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(LocationForm, [{
+    key: "handleSubmit",
+    value: function handleSubmit(e) {
+      var _this2 = this;
+
+      e.preventDefault();
+      this.props.createSingleLocation(this.state, this.props.pokemonId).then(function (loc) {
+        _this2.props.history.push("/pokemon/".concat(_this2.props.pokemonId));
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        onSubmit: this.handleSubmit
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Latitude:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        value: this.state.lat.toString(),
+        disabled: true
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Longitude:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        value: this.state.lng.toString(),
+        disabled: true
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "submit",
+        value: "Add Location"
+      }));
+    }
+  }]);
+
+  return LocationForm;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(LocationForm));
+
+/***/ }),
+
+/***/ "./frontend/components/pokemon/location_form_container.js":
+/*!****************************************************************!*\
+  !*** ./frontend/components/pokemon/location_form_container.js ***!
+  \****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _location_form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./location_form */ "./frontend/components/pokemon/location_form.jsx");
+/* harmony import */ var _actions_location_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/location_actions */ "./frontend/actions/location_actions.js");
+
+
+
+
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+  return {
+    lat: parseFloat(new URLSearchParams(ownProps.location.search).get('lat')),
+    lng: parseFloat(new URLSearchParams(ownProps.location.search).get('lng')),
+    pokemonId: parseInt(ownProps.match.params.pokemonId)
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    createSingleLocation: function createSingleLocation(location, pokemonId) {
+      return dispatch(Object(_actions_location_actions__WEBPACK_IMPORTED_MODULE_2__["createSingleLocation"])(location, pokemonId));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_location_form__WEBPACK_IMPORTED_MODULE_1__["default"]));
+
+/***/ }),
+
 /***/ "./frontend/components/pokemon/pokemon_detail.jsx":
 /*!********************************************************!*\
   !*** ./frontend/components/pokemon/pokemon_detail.jsx ***!
@@ -273,6 +430,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _items_item_detail_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../items/item_detail_container */ "./frontend/components/items/item_detail_container.js");
+/* harmony import */ var _pokemon_map__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./pokemon_map */ "./frontend/components/pokemon/pokemon_map.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -290,6 +448,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -346,7 +505,12 @@ function (_React$Component) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "/pokemon/".concat(self.props.match.params.pokemonId, "/items/").concat(item.id)
         }, item.name));
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Locations: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pokemon_map__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        locations: self.props.locations,
+        createSingleLocation: self.props.createSingleLocation,
+        pokemonId: self.props.match.params.pokemonId,
+        image: this.props.image
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
         path: "/pokemon/:pokemonId/items/:itemId",
         component: _items_item_detail_container__WEBPACK_IMPORTED_MODULE_2__["default"]
       })));
@@ -373,6 +537,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pokemon_detail__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./pokemon_detail */ "./frontend/components/pokemon/pokemon_detail.jsx");
 /* harmony import */ var _actions_pokemon_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/pokemon_actions */ "./frontend/actions/pokemon_actions.js");
 /* harmony import */ var _reducers_selectors__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../reducers/selectors */ "./frontend/reducers/selectors.js");
+/* harmony import */ var _actions_location_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/location_actions */ "./frontend/actions/location_actions.js");
+
 
 
 
@@ -382,6 +548,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     requestSinglePokemon: function requestSinglePokemon(id) {
       return dispatch(Object(_actions_pokemon_actions__WEBPACK_IMPORTED_MODULE_2__["requestSinglePokemon"])(id));
+    },
+    createSingleLocation: function createSingleLocation(location, pokemonId) {
+      return dispatch(Object(_actions_location_actions__WEBPACK_IMPORTED_MODULE_4__["createSingleLocation"])(location, pokemonId));
     }
   };
 };
@@ -390,6 +559,8 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
     pokemon: state.entities.pokemon[ownProps.match.params.pokemonId],
     items: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_3__["selectPokeItems"])(state, state.entities.pokemon[ownProps.match.params.pokemonId]),
+    locations: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_3__["selectPokeLocations"])(state.entities.locations),
+    image: state.entities.pokemon[ownProps.match.params.pokemonId].image_url,
     loading: state.ui.loading.detailLoading
   };
 };
@@ -772,6 +943,157 @@ function (_React$Component) {
 
 /***/ }),
 
+/***/ "./frontend/components/pokemon/pokemon_map.jsx":
+/*!*****************************************************!*\
+  !*** ./frontend/components/pokemon/pokemon_map.jsx ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _util_marker_manager__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../util/marker_manager */ "./frontend/util/marker_manager.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _location_form_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./location_form_container */ "./frontend/components/pokemon/location_form_container.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+
+var PokemonMap =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(PokemonMap, _React$Component);
+
+  function PokemonMap(props) {
+    var _this;
+
+    _classCallCheck(this, PokemonMap);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(PokemonMap).call(this, props));
+    _this.state = {
+      showCoords: false,
+      lat: "",
+      lng: ""
+    };
+    return _this;
+  }
+
+  _createClass(PokemonMap, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate() {
+      this.MarkerManager.updateMarkers(this.props.locations);
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      var mapOptions = {
+        center: {
+          lat: 37.7758,
+          lng: -122.435
+        },
+        zoom: 13
+      };
+      this.map = new google.maps.Map(this.mapNode, mapOptions);
+
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+          var pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
+
+          _this2.map.setCenter(pos);
+        });
+      }
+
+      ;
+      this.MarkerManager = new _util_marker_manager__WEBPACK_IMPORTED_MODULE_1__["default"](this.map, this.handleMarkerClick.bind(this), this.props.image);
+      this.registerListeners();
+      this.MarkerManager.updateMarkers(this.props.locations);
+    }
+  }, {
+    key: "registerListeners",
+    value: function registerListeners() {
+      var _this3 = this;
+
+      var getCoordsObj = function getCoordsObj(latLng) {
+        return {
+          lat: latLng.lat(),
+          lng: latLng.lng()
+        };
+      };
+
+      google.maps.event.addListener(this.map, 'click', function (event) {
+        var coords = getCoordsObj(event.latLng);
+
+        _this3.handleClick(coords);
+      });
+    }
+  }, {
+    key: "handleMarkerClick",
+    value: function handleMarkerClick(loc) {
+      this.setState({
+        showCoords: true,
+        lat: loc.lat,
+        lng: loc.lng
+      });
+    }
+  }, {
+    key: "handleClick",
+    value: function handleClick(coords) {
+      var self = this;
+      this.props.history.push({
+        pathname: "/pokemon/".concat(self.props.pokemonId, "/location/new"),
+        search: "lat=".concat(coords.lat, "&lng=").concat(coords.lng)
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this4 = this;
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "pokemon-map",
+        ref: function ref(map) {
+          return _this4.mapNode = map;
+        }
+      }), this.state.showCoords ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Latitude: ", this.state.lat, "Longitude: ", this.state.lng) : "", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Route"], {
+        path: "/pokemon/:pokemonId/location/new",
+        component: _location_form_container__WEBPACK_IMPORTED_MODULE_3__["default"]
+      }));
+    }
+  }]);
+
+  return PokemonMap;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(PokemonMap));
+
+/***/ }),
+
 /***/ "./frontend/middleware/thunk.js":
 /*!**************************************!*\
   !*** ./frontend/middleware/thunk.js ***!
@@ -868,12 +1190,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _pokemon_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./pokemon_reducer */ "./frontend/reducers/pokemon_reducer.js");
 /* harmony import */ var _items_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./items_reducer */ "./frontend/reducers/items_reducer.js");
+/* harmony import */ var _location_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./location_reducer */ "./frontend/reducers/location_reducer.js");
+
 
 
 
 var entitiesReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   pokemon: _pokemon_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
-  items: _items_reducer__WEBPACK_IMPORTED_MODULE_2__["default"]
+  items: _items_reducer__WEBPACK_IMPORTED_MODULE_2__["default"],
+  locations: _location_reducer__WEBPACK_IMPORTED_MODULE_3__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (entitiesReducer);
 
@@ -999,6 +1324,52 @@ var loadingReducer = function loadingReducer() {
 
 /***/ }),
 
+/***/ "./frontend/reducers/location_reducer.js":
+/*!***********************************************!*\
+  !*** ./frontend/reducers/location_reducer.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_pokemon_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/pokemon_actions */ "./frontend/actions/pokemon_actions.js");
+/* harmony import */ var _actions_location_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/location_actions */ "./frontend/actions/location_actions.js");
+/* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash/merge */ "./node_modules/lodash/merge.js");
+/* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash_merge__WEBPACK_IMPORTED_MODULE_2__);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+var locationReducer = function locationReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_pokemon_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_SINGLE_POKEMON"]:
+      if (action.whole.locations === undefined) {
+        return {};
+      } else {
+        return action.whole.locations;
+      }
+
+    case _actions_location_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_SINGLE_LOCATION"]:
+      var new_state = _defineProperty({}, action.location.id, action.location);
+
+      return lodash_merge__WEBPACK_IMPORTED_MODULE_2___default()({}, state, new_state);
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (locationReducer);
+
+/***/ }),
+
 /***/ "./frontend/reducers/pokemon_reducer.js":
 /*!**********************************************!*\
   !*** ./frontend/reducers/pokemon_reducer.js ***!
@@ -1026,7 +1397,9 @@ var pokemonReducer = function pokemonReducer() {
       return lodash_merge__WEBPACK_IMPORTED_MODULE_1___default()({}, state, action.pokemon);
 
     case _actions_pokemon_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_SINGLE_POKEMON"]:
-      return lodash_merge__WEBPACK_IMPORTED_MODULE_1___default()({}, state, _defineProperty({}, action.whole.pokemon.id, action.whole.pokemon));
+      var selected_pokemon = _defineProperty({}, action.whole.pokemon.id, action.whole.pokemon);
+
+      return lodash_merge__WEBPACK_IMPORTED_MODULE_1___default()({}, state, selected_pokemon);
 
     default:
       return state;
@@ -1064,7 +1437,7 @@ var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])(
 /*!****************************************!*\
   !*** ./frontend/reducers/selectors.js ***!
   \****************************************/
-/*! exports provided: selectAllPokemon, selectPokeItems, selectPokemonItem */
+/*! exports provided: selectAllPokemon, selectPokeItems, selectPokemonItem, selectPokeLocations */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1072,6 +1445,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectAllPokemon", function() { return selectAllPokemon; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectPokeItems", function() { return selectPokeItems; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectPokemonItem", function() { return selectPokemonItem; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectPokeLocations", function() { return selectPokeLocations; });
 var selectAllPokemon = function selectAllPokemon(state) {
   return Object.values(state.entities.pokemon);
 };
@@ -1082,6 +1456,9 @@ var selectPokeItems = function selectPokeItems(state, pokemon) {
 };
 var selectPokemonItem = function selectPokemonItem(state, itemId) {
   return state.entities.items[itemId];
+};
+var selectPokeLocations = function selectPokeLocations(locations) {
+  return Object.values(locations);
 };
 
 /***/ }),
@@ -1140,7 +1517,7 @@ var configureStore = function configureStore() {
 /*!***********************************!*\
   !*** ./frontend/util/api_util.js ***!
   \***********************************/
-/*! exports provided: fetchAllPokemon, fetchSinglePokemon, createSinglePokemon */
+/*! exports provided: fetchAllPokemon, fetchSinglePokemon, createSinglePokemon, createSingleLocation */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1148,6 +1525,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAllPokemon", function() { return fetchAllPokemon; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchSinglePokemon", function() { return fetchSinglePokemon; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createSinglePokemon", function() { return createSinglePokemon; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createSingleLocation", function() { return createSingleLocation; });
 var fetchAllPokemon = function fetchAllPokemon() {
   return $.ajax({
     url: "/api/pokemon",
@@ -1169,6 +1547,99 @@ var createSinglePokemon = function createSinglePokemon(pokemon) {
     }
   });
 };
+var createSingleLocation = function createSingleLocation(location, pokemonId) {
+  return $.ajax({
+    url: "/api/pokemon/".concat(pokemonId, "/location"),
+    method: 'POST',
+    data: {
+      location: location
+    }
+  });
+};
+
+/***/ }),
+
+/***/ "./frontend/util/marker_manager.js":
+/*!*****************************************!*\
+  !*** ./frontend/util/marker_manager.js ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return MarkerManager; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var MarkerManager =
+/*#__PURE__*/
+function () {
+  function MarkerManager(map, handleClick, image) {
+    _classCallCheck(this, MarkerManager);
+
+    this.map = map;
+    this.handleClick = handleClick;
+    this.image = image;
+    this.markers = {};
+  }
+
+  _createClass(MarkerManager, [{
+    key: "updateMarkers",
+    value: function updateMarkers(locations) {
+      var _this = this;
+
+      var locsObj = {};
+      locations.forEach(function (loc) {
+        return locsObj[loc.id] = loc;
+      });
+      locations.filter(function (loc) {
+        return !_this.markers[loc.id];
+      }).forEach(function (newLoc) {
+        return _this.createMarkerFromLoc(newLoc, _this.handleClick);
+      });
+      Object.keys(this.markers).filter(function (locId) {
+        return !locsObj[locId];
+      }).forEach(function (locId) {
+        return _this.removeMarker(_this.markers[locId]);
+      });
+    }
+  }, {
+    key: "createMarkerFromLoc",
+    value: function createMarkerFromLoc(loc) {
+      var _this2 = this;
+
+      var icon = {
+        url: this.image,
+        scaledSize: new google.maps.Size(50, 50)
+      };
+      var position = new google.maps.LatLng(loc.lat, loc.lng);
+      var marker = new google.maps.Marker({
+        position: position,
+        map: this.map,
+        icon: icon,
+        locId: loc.id
+      });
+      marker.addListener('click', function () {
+        return _this2.handleClick(loc);
+      });
+      this.markers[marker.locId] = marker;
+    }
+  }, {
+    key: "removeMarker",
+    value: function removeMarker(marker) {
+      this.markers[marker.locId].setMap(null);
+      delete this.markers[marker.locId];
+    }
+  }]);
+
+  return MarkerManager;
+}();
+
+
 
 /***/ }),
 

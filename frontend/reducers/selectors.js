@@ -10,3 +10,7 @@ export const selectPokeItems = (state, pokemon) => {
 export const selectPokemonItem = (state, itemId) => {
    return state.entities.items[itemId];
 }
+
+export const selectPokeLocations = (locations) => {
+    return Object.values(locations);
+}
