@@ -583,6 +583,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var aws_s3__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! aws-s3 */ "./node_modules/aws-s3/dist/aws-s3.js");
 /* harmony import */ var aws_s3__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(aws_s3__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _util_keys__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../util/keys */ "./frontend/util/keys.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -606,11 +607,12 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var config = {
   bucketName: 'pokedexham',
   region: 'us-west-1',
-  accessKeyId: 'AKIAJP736YQ3LY4VAGLA',
-  secretAccessKey: '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'
+  accessKeyId: _util_keys__WEBPACK_IMPORTED_MODULE_3__["accessKeyId"],
+  secretAccessKey: _util_keys__WEBPACK_IMPORTED_MODULE_3__["secretAccessKey"]
 };
 var S3Client = new aws_s3__WEBPACK_IMPORTED_MODULE_2___default.a(config);
 
@@ -1576,6 +1578,22 @@ var createSingleLocation = function createSingleLocation(location, pokemonId) {
     }
   });
 };
+
+/***/ }),
+
+/***/ "./frontend/util/keys.js":
+/*!*******************************!*\
+  !*** ./frontend/util/keys.js ***!
+  \*******************************/
+/*! exports provided: accessKeyId, secretAccessKey */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "accessKeyId", function() { return accessKeyId; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "secretAccessKey", function() { return secretAccessKey; });
+var accessKeyId = 'AKIAJLRTE6WHGL634GUQ';
+var secretAccessKey = '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';
 
 /***/ }),
 

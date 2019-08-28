@@ -1,12 +1,13 @@
 import React from 'react';
 import {withRouter} from 'react-router-dom';
 import S3 from 'aws-s3';
+import * as Keys from '../../util/keys';
 
 const config = {
     bucketName: 'pokedexham',
     region: 'us-west-1',
-    accessKeyId: 'AKIAJP736YQ3LY4VAGLA',
-    secretAccessKey: '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'
+    accessKeyId: Keys.accessKeyId,
+    secretAccessKey: Keys.secretAccessKey
 }
 
 const S3Client = new S3(config);
