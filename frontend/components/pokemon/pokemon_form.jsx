@@ -1,22 +1,37 @@
 import React from 'react';
 import {withRouter} from 'react-router-dom';
+import S3 from 'aws-s3';
+
+const config = {
+    bucketName: 'pokedexham',
+    region: 'us-west-1',
+    accessKeyId: 'AKIAJP736YQ3LY4VAGLA',
+    secretAccessKey: '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'
+}
+
+const S3Client = new S3(config);
 
 class PokemonForm extends React.Component {
     constructor(props){
         super(props);
         this.TYPES = POKEMON_TYPES;
         this.state = {name: "", attack: "", defense: "", image_url: "", poke_type: this.TYPES[0], moves: ["", ""]};
+        this.file = "";
         this.update = this.update.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.updateMoves = this.updateMoves.bind(this);
-        
+        this.fileChangeHandler = this.fileChangeHandler.bind(this);
     }
 
     handleSubmit(e){
         e.preventDefault();
         const self = this;
-        this.props.createPokemon(self.state).then((poke) => {
-            this.props.history.push(`pokemon/${poke.pokemon.id}`);
+        S3Client.uploadFile(this.file).then((data) => {
+            console.log(data.location); 
+            self.setState({image_url: data.location})
+            self.props.createPokemon(self.state).then((poke) => {
+                self.props.history.push(`pokemon/${poke.pokemon.id}`);
+            })
         })
     }
 
@@ -32,6 +47,10 @@ class PokemonForm extends React.Component {
     update(key){
         const self = this;
         return e => self.setState({[key]: e.target.value});
+    }
+
+    fileChangeHandler(e){
+        this.file = e.target.files[0];
     }
 
     render(){
@@ -52,7 +71,7 @@ class PokemonForm extends React.Component {
                     <br/>
                     <input type="number" onChange={this.update('defense')} placeholder="Defense" />
                     <br/>
-                    <input type="text" onChange={this.update('image_url')} placeholder="Image" />
+                    <input type="file" onChange={this.fileChangeHandler} />
                     <br/>
                     <select name="poke_type" id="" onChange={this.update('poke_type')} >
                         {this.TYPES.map((type, idx) => {
