@@ -505,14 +505,14 @@ function (_React$Component) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "/pokemon/".concat(self.props.match.params.pokemonId, "/items/").concat(item.id)
         }, item.name));
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Locations: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pokemon_map__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+        path: "/pokemon/:pokemonId/items/:itemId",
+        component: _items_item_detail_container__WEBPACK_IMPORTED_MODULE_2__["default"]
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Locations: "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pokemon_map__WEBPACK_IMPORTED_MODULE_3__["default"], {
         locations: self.props.locations,
         createSingleLocation: self.props.createSingleLocation,
         pokemonId: self.props.match.params.pokemonId,
         image: this.props.image
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-        path: "/pokemon/:pokemonId/items/:itemId",
-        component: _items_item_detail_container__WEBPACK_IMPORTED_MODULE_2__["default"]
       })));
     }
   }]);
@@ -1592,8 +1592,8 @@ var createSingleLocation = function createSingleLocation(location, pokemonId) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "accessKeyId", function() { return accessKeyId; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "secretAccessKey", function() { return secretAccessKey; });
-var accessKeyId = 'AKIAJLRTE6WHGL634GUQ';
-var secretAccessKey = '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';
+var accessKeyId = 'AKIAJPDNINNQ63MU4BHA';
+var secretAccessKey = '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';
 
 /***/ }),
 
@@ -1652,7 +1652,7 @@ function () {
 
       var icon = {
         url: this.image,
-        scaledSize: new google.maps.Size(50, 50)
+        scaledSize: new google.maps.Size(30, 30)
       };
       var position = new google.maps.LatLng(loc.lat, loc.lng);
       var marker = new google.maps.Marker({
@@ -39944,7 +39944,7 @@ function warning(message) {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
+/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

@@ -1,3 +1,3 @@
-export const accessKeyId = 'AKIAJLRTE6WHGL634GUQ';
+export const accessKeyId = 'AKIAJPDNINNQ63MU4BHA';
 
-export const secretAccessKey = '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';
+export const secretAccessKey = '1VlQUyz4jr7379eUgaS+vWtsO85Fopme5cw8VhuF';

@@ -22,7 +22,7 @@ export default class MarkerManager {
     createMarkerFromLoc(loc){
         var icon = {
             url: this.image, 
-            scaledSize: new google.maps.Size(50, 50),
+            scaledSize: new google.maps.Size(30, 30),
         }
         const position = new google.maps.LatLng(loc.lat, loc.lng);
         const marker = new google.maps.Marker({

@@ -41,9 +41,9 @@ class PokemonDetail extends React.Component {
                             )
                         })}
                     </ul>
+                    <Route path="/pokemon/:pokemonId/items/:itemId" component={ItemDetailContainer} />
                     <h1>Locations: </h1>
                     <PokemonMap locations={self.props.locations} createSingleLocation={self.props.createSingleLocation} pokemonId={self.props.match.params.pokemonId} image={this.props.image} />
-                    <Route path="/pokemon/:pokemonId/items/:itemId" component={ItemDetailContainer} />
                 </div>)}
             </div>
         )
