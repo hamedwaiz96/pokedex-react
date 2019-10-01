@@ -31,12 +31,12 @@ export const startLoadingAllPokemon = () => ({
 
 export const requestAllPokemon = () => dispatch => {
     dispatch(startLoadingAllPokemon());
-    return(APIUtil.fetchAllPokemon().then((pokemon) => dispatch(receiveAllPokemon(pokemon))));
+    return APIUtil.fetchAllPokemon().then((pokemon) => dispatch(receiveAllPokemon(pokemon)));
 }
 
 export const requestSinglePokemon = (id) => dispatch => {
     dispatch(startLoadingSinglePokemon());
-    return (APIUtil.fetchSinglePokemon(id).then((poke) => {dispatch(receiveSinglePokemon(poke)); return poke;}));
+    return APIUtil.fetchSinglePokemon(id).then((poke) => {dispatch(receiveSinglePokemon(poke)); return poke;});
 }
 
 export const createPokemon = (pokemon) => dispatch => (

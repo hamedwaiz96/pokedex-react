@@ -1,16 +1,15 @@
 import React from 'react';
 import {withRouter} from 'react-router-dom';
-import S3 from 'aws-s3';
-import * as Keys from '../../util/keys';
+import { CLOUDINARY_IMAGE_URL, CLOUDINARY_PRESET} from '../../util/keys';
 
-const config = {
-    bucketName: 'pokedexham',
-    region: 'us-west-1',
-    accessKeyId: Keys.accessKeyId,
-    secretAccessKey: Keys.secretAccessKey
+let ERRORS = {
+    'name': "Name can't be blank",
+    'attack': "Attack can't be blank",
+    'defense': "Defense can't be blank",
+    'poke_type': "Type can't be blank",
+    'moves': "Moves can't be blank",
+    'photo': "Image Upload Error"
 }
-
-const S3Client = new S3(config);
 
 class PokemonForm extends React.Component {
     constructor(props){
@@ -27,13 +26,59 @@ class PokemonForm extends React.Component {
     handleSubmit(e){
         e.preventDefault();
         const self = this;
-        S3Client.uploadFile(this.file).then((data) => {
-            console.log(data.location); 
-            self.setState({image_url: data.location})
-            self.props.createPokemon(self.state).then((poke) => {
-                self.props.history.push(`pokemon/${poke.pokemon.id}`);
-            })
-        })
+        let Formdata = new FormData();
+        Formdata.append('file', this.file);
+        Formdata.append('upload_preset', CLOUDINARY_PRESET)
+        Formdata.append('folder', "pokedex-location/pokemon")
+        if (this.state.name != "" && this.state.hours != "") {
+            axios({
+                url: CLOUDINARY_IMAGE_URL,
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                data: Formdata
+            }).then(
+                (res) => {
+                    self.state.photo = res.data.secure_url;
+                    self.props.createPokemon(self.state).then((poke) => {
+                        self.props.history.push(`pokemon/${poke.pokemon.id}`)
+                    })
+                },
+                (err) => {
+                    this.props.receiveErrors(err);
+                }
+            )
+        } else {
+            let errors = [];
+            if (this.state.name === "") {
+                errors.push(ERRORS['name'])
+            }
+            if (this.state.attack === "") {
+                errors.push(ERRORS['attack'])
+            }
+            if (this.state.defense === "") {
+                errors.push(ERRORS['defense'])
+            }
+            if (this.state.poke_type === "") {
+                errors.push(ERRORS['poke_type'])
+            }
+            if (this.state.moves.length === 0) {
+                errors.push(ERRORS['moves'])
+            }
+            if (this.state.image_url === "") {
+                errors.push(ERRORS['photo'])
+            }
+            this.props.receiveErrors(errors)
+        }
+        // S3Client.uploadFile(this.file).then((data) => {
+        //     console.log(data.location); 
+        //     self.setState({image_url: data.location})
+        //     self.props.createPokemon(self.state).then((poke) => {
+        //         self.props.history.push(`pokemon/${poke.pokemon.id}`);
+        //     })
+        // })
+
     }
 
     updateMoves(key){
