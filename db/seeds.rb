@@ -13,15 +13,16 @@ def create_random_item!(pokemon)
     price: (1..100).to_a.sample,
     happiness: (1..100).to_a.sample,
     image_url: %w(
-      /assets/pokemon_berry.svg
-      /assets/pokemon_egg.svg
-      /assets/pokemon_potion.svg
-      /assets/pokemon_super_potion.svg
+      pokemon_berry.svg
+      pokemon_egg.svg
+      pokemon_potion.svg
+      pokemon_super_potion.svg
     ).sample
   )
 end
 
 ActiveRecord::Base.transaction do
+  Item.destroy_all
   Pokemon.destroy_all
 
   pokemon = {
@@ -1378,7 +1379,8 @@ ActiveRecord::Base.transaction do
   }
 
   pokemon = pokemon.map do |num, stats|
-    stats['image_url'] = "images/pokemon_snaps/#{num}.svg"
+    stats['image_url'] = "pokemon_snaps/#{num}.svg"
+    stats['id'] = num
     stats
   end
 
