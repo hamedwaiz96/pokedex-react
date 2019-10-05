@@ -1378,8 +1378,7 @@ ActiveRecord::Base.transaction do
   }
 
   pokemon = pokemon.map do |num, stats|
-    # stats['image_url'] = "#{num}.svg"
-    stats['image_url'] = asset_url("images/pokemon_snaps/#{num}.svg")
+    stats['image_url'] = "images/pokemon_snaps/#{num}.svg"
     stats
   end
 
