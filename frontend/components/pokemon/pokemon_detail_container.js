@@ -6,14 +6,17 @@ import {createSingleLocation} from '../../actions/location_actions';
 
 const mapStateToProps = (state, ownProps) => {
     const pokemon = state.entities.pokemon[ownProps.match.params.pokemonId]
-    debugger;
-    return {
-        pokemon,
-        items: selectPokeItems(state, pokemon),
-        locations: selectPokeLocations(state.entities.locations),
-        image: pokemon.image_url,
-        loading: state.ui.loading.detailLoading
+    if (pokemon){
+        return {
+            pokemon,
+            items: selectPokeItems(state, pokemon),
+            locations: selectPokeLocations(state.entities.locations),
+            image: pokemon.image_url,
+        }
+    } else {
+        return {}
     }
+    
 };
 
 const mapDispatchToProps = dispatch => ({

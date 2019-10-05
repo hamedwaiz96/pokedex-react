@@ -460,16 +460,26 @@ function (_React$Component) {
   _inherits(PokemonDetail, _React$Component);
 
   function PokemonDetail(props) {
+    var _this;
+
     _classCallCheck(this, PokemonDetail);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(PokemonDetail).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(PokemonDetail).call(this, props));
+    _this.state = {
+      loading: true
+    };
+    return _this;
   }
 
   _createClass(PokemonDetail, [{
     key: "componentDidMount",
     value: function componentDidMount() {
       var self = this;
-      self.props.requestSinglePokemon(self.props.match.params.pokemonId);
+      self.props.requestSinglePokemon(self.props.match.params.pokemonId).then(function () {
+        self.setState({
+          loading: false
+        });
+      });
     }
   }, {
     key: "componentDidUpdate",
@@ -485,7 +495,7 @@ function (_React$Component) {
     value: function render() {
       var self = this;
 
-      if (self.props.loading) {
+      if (self.state.loading) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           id: "loading-pokeball-container"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -549,14 +559,17 @@ __webpack_require__.r(__webpack_exports__);
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   var pokemon = state.entities.pokemon[ownProps.match.params.pokemonId];
-  debugger;
-  return {
-    pokemon: pokemon,
-    items: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_3__["selectPokeItems"])(state, pokemon),
-    locations: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_3__["selectPokeLocations"])(state.entities.locations),
-    image: pokemon.image_url,
-    loading: state.ui.loading.detailLoading
-  };
+
+  if (pokemon) {
+    return {
+      pokemon: pokemon,
+      items: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_3__["selectPokeItems"])(state, pokemon),
+      locations: Object(_reducers_selectors__WEBPACK_IMPORTED_MODULE_3__["selectPokeLocations"])(state.entities.locations),
+      image: pokemon.image_url
+    };
+  } else {
+    return {};
+  }
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
@@ -1487,9 +1500,11 @@ var selectAllPokemon = function selectAllPokemon(state) {
   return Object.values(state.entities.pokemon);
 };
 var selectPokeItems = function selectPokeItems(state, pokemon) {
-  return pokemon.item_ids.map(function (id) {
-    return state.entities.items[id];
-  });
+  if (pokemon !== undefined) {
+    return pokemon.item_ids.map(function (id) {
+      return state.entities.items[id];
+    });
+  }
 };
 var selectPokemonItem = function selectPokemonItem(state, itemId) {
   return state.entities.items[itemId];

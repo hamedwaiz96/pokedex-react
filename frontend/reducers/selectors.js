@@ -4,7 +4,9 @@ export const selectAllPokemon = (state) => {
 }
 
 export const selectPokeItems = (state, pokemon) => {
-    return pokemon.item_ids.map((id) => state.entities.items[id])
+    if(pokemon !== undefined){
+        return pokemon.item_ids.map((id) => state.entities.items[id])
+    }
 }
 
 export const selectPokemonItem = (state, itemId) => {

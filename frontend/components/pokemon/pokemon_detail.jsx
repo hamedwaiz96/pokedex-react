@@ -6,11 +6,16 @@ import PokemonMap from './pokemon_map';
 class PokemonDetail extends React.Component {
     constructor(props){
         super(props);
+        this.state = {
+            loading: true,
+        }
     }
 
     componentDidMount(){
         const self = this;
-        self.props.requestSinglePokemon(self.props.match.params.pokemonId)
+        self.props.requestSinglePokemon(self.props.match.params.pokemonId).then(() => {
+            self.setState({loading: false})
+        })
     }
 
     componentDidUpdate(prevProps){
@@ -22,7 +27,7 @@ class PokemonDetail extends React.Component {
 
     render(){
         const self = this;
-        if(self.props.loading) {
+        if(self.state.loading) {
             return(
                 <div id="loading-pokeball-container">
                     <div id="loading-pokeball"></div>
